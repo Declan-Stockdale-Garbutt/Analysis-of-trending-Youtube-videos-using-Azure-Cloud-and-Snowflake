@@ -1,6 +1,7 @@
 # Analysis of trending Youtube videos using Azure Cloud and Snowflake
 
 Full report available here
+
 https://github.com/Declan-Stockdale/Youtube_trending_videos/blob/master/Hand%20over%20report%20big%20data%20engineering.docx
 
 Assignment as part of Big Data Engineering subject
