@@ -31,7 +31,7 @@ The way the trending videos were collected sometimes resulted in two records for
 
 ## Examples of output
 
-1 . Find channel with most distinct trending videos
+### 1 . Find channel with most distinct trending videos
 ```
 SELECT CHANNELTITLE,
        COUNT(DISTINCT(TITLE)) as No_Channel_vids
@@ -43,7 +43,7 @@ FROM table_youtube_final
 Result is 'Colours TV' with 809 videos
 ![image](https://user-images.githubusercontent.com/53500810/206882151-d3aecd26-929f-44ae-9f8d-692e0d388165.png)
 
-2. For each country, find the category with the most videos
+### 2. For each country, find the category with the most videos
 
 ```
 SELECT
@@ -121,7 +121,7 @@ FROM
 
 ![image](https://user-images.githubusercontent.com/53500810/206882370-943ed1f4-ed86-483e-9b8c-48734396f070.png)
 
-3. Which category is best?
+### 3. Which category is best?
 
 Remove NonProfit due to political videos and foreign issues
 ```
@@ -150,7 +150,7 @@ FROM
       AND NOT CATEGORY_TITLE = 'Nonprofits & Activism';
 ```
 
-Which categories have the most market share for each region
+### 4. Which categories have the most market share for each region
 
 ```
 SELECT
@@ -185,3 +185,9 @@ FROM(
 ```
 
 ![image](https://user-images.githubusercontent.com/53500810/206882555-5839f257-845f-4b9e-a706-33b35001f3a8.png)
+
+### Final recomendation
+
+This recommendations from this report are to start a new channel in the Science and Technology category. This is due to the high average view count and comments numbers per video along with the low number of unique channels may mean less competition and more immediate impact of videos reaching a trending status. From the year from 2020 -2021 the category saw relatively small changes in average viewership and unique channel numbers meaning the category is relatively stable and not likely to experience wild trends over the foreseeable future. 
+The categories by average view count can be seen in figure 12. Science and Technology makes a sizeable proportion of each country’s average viewership by category, and from figure 13 we can see that it’s ranked in the top 4 in every country by average views.
+
