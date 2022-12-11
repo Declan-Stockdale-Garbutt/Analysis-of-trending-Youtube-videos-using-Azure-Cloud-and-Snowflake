@@ -186,6 +186,76 @@ FROM(
 
 ![image](https://user-images.githubusercontent.com/53500810/206882555-5839f257-845f-4b9e-a706-33b35001f3a8.png)
 
+### 5. Average view count for each category
+
+```
+  SELECT
+        -- get values and find averages using table aliases and find differences between months
+        first.CATEGORY_TITLE,
+        first.NUMBER_DISTINCT_VIDEOS as initial_videos,
+        latest.NUMBER_DISTINCT_VIDEOS as final_videos,
+        latest.NUMBER_DISTINCT_VIDEOS - first.NUMBER_DISTINCT_VIDEOS as CHANGE_VIDEOS,
+        first.NUMBER_DISTINCT_CHANNELS initial_channels,
+        latest.NUMBER_DISTINCT_CHANNELS as final_videos,
+        latest.NUMBER_DISTINCT_CHANNELS - first.NUMBER_DISTINCT_CHANNELS as CHANGE_CHANNELS,
+        first.AVG_VIEWS as initial_views,
+        latest.AVG_VIEWS as final_views,
+        latest.AVG_VIEWS - first.AVG_VIEWS as CHANGE_AVG_VIEWS,
+        first.AVG_LIKES as initial_likes,
+        latest.AVG_LIKES as final_likes,
+        latest.AVG_LIKES - first.AVG_LIKES as CHANGE_AVG_LIKES,
+        first.AVG_COMMENTS as initial_comments,
+        latest.AVG_COMMENTS as final_comments,
+        latest.AVG_COMMENTS - first.AVG_COMMENTS as CHANGE_AVG_COMMENTS //latest.SUM(VIEW_COUNT) - latest.SUM(VIEW_COUNT) as CHANGE_VIEGS
+    FROM
+        (
+            -- get all relevant data from second earliest month and perform aggregations
+            Select
+                CATEGORY_TITLE,
+                YEAR_MONTH,
+                COUNT(DISTINCT(TITLE)) as number_distinct_videos,
+                COUNT(DISTINCT(CHANNELID)) as number_distinct_channels,
+                ROUND(SUM(VIEW_COUNT) / number_distinct_videos, 0) as AVG_VIEWS,
+                ROUND(SUM(LIKES) / number_distinct_videos, 0) as AVG_LIKES,
+                ROUND(SUM(COMMENT_COUNT) / number_distinct_videos, 0) as AVG_COMMENTS
+            FROM
+                valid_categories_monthly
+              WHERE
+                  YEAR_MONTH = '2020-09-01'
+              GROUP BY
+                  CATEGORY_TITLE,
+                  YEAR_MONTH
+              ORDER BY
+                  CATEGORY_TITLE,
+                  YEAR_MONTH
+
+        ) as first
+
+        INNER JOIN (
+          -- get all relevant data from second latest month and perform aggregations
+            SELECT
+                CATEGORY_TITLE,
+                YEAR_MONTH,
+                COUNT(DISTINCT(TITLE)) as number_distinct_videos,
+                COUNT(DISTINCT(CHANNELID)) as number_distinct_channels,
+                ROUND(SUM(VIEW_COUNT) / number_distinct_videos, 0) as AVG_VIEWS,
+                ROUND(SUM(LIKES) / number_distinct_videos, 0) as AVG_LIKES,
+                ROUND(SUM(COMMENT_COUNT) / number_distinct_videos, 0) as AVG_COMMENTS
+            FROM
+                valid_categories_monthly
+              WHERE
+                  YEAR_MONTH = '2021-12-01'
+              GROUP BY
+                  CATEGORY_TITLE,
+                  YEAR_MONTH
+              ORDER BY
+                  CATEGORY_TITLE,
+                  YEAR_MONTH
+        ) AS latest ON first.CATEGORY_TITLE = latest.CATEGORY_TITLE;
+```
+
+![image](https://user-images.githubusercontent.com/53500810/206882659-968b40d4-7b6d-43b6-9295-8a55bbac1fbe.png)
+
 ### Final recomendation
 
 This recommendations from this report are to start a new channel in the Science and Technology category. This is due to the high average view count and comments numbers per video along with the low number of unique channels may mean less competition and more immediate impact of videos reaching a trending status. From the year from 2020 -2021 the category saw relatively small changes in average viewership and unique channel numbers meaning the category is relatively stable and not likely to experience wild trends over the foreseeable future. 
