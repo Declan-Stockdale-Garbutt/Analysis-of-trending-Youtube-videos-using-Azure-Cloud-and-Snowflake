@@ -257,7 +257,7 @@ FROM(
 
 ![image](https://user-images.githubusercontent.com/53500810/206882659-968b40d4-7b6d-43b6-9295-8a55bbac1fbe.png)
 
-### Final recomendation
+## Final recomendation
 
 This recommendations from this report are to start a new channel in the Science and Technology category. This is due to the high average view count and comments numbers per video along with the low number of unique channels may mean less competition and more immediate impact of videos reaching a trending status. From the year from 2020 -2021 the category saw relatively small changes in average viewership and unique channel numbers meaning the category is relatively stable and not likely to experience wild trends over the foreseeable future. 
 The categories by average view count can be seen in figure 12. Science and Technology makes a sizeable proportion of each country’s average viewership by category, and from figure 13 we can see that it’s ranked in the top 4 in every country by average views.
